@@ -72,6 +72,7 @@ io.on('connection', function (socket) {
     md.update(actual, 'utf8')
     try {
       if (pub.verify(md.digest().bytes(), signature)) {
+        findWinner(election) // make sure the election results have been finalized before election is closed
         console.log('[CREATOR] closing election ' + socket.electionCode)
         socket.disconnect() // disconnect() will delete the election for us
       } else {
@@ -115,14 +116,21 @@ io.on('connection', function (socket) {
     actElection.addVoterID(data.fingerprint)
     actElection.ballots.push(data.ballot)
     console.log('[VOTER] cast vote ' + data.ballot)
-    // FIXME: This should be periodic, not every time a vote is cast
-    // TODO: ALSO ADD "DOWNLOAD BALLOTS" FUNCTIONALITY
-    // TODO: ADD CHECKBOX TO TOGGLE LOG IN ELECTION CREATION
-    const winner = AV.alternativeVote(actElection)
-    console.log('[AV] Winner ' + winner.name + ' found in election ' + actElection.code)
-    io.to(actElection.code).emit('winner-update', winner)
+    if (!actElection.countPending) {
+      actElection.countPending = true
+      console.log('[AV] scheduling count for ' + actElection.code)
+      setTimeout(findWinner, 1000, actElection)
+    }
   })
 })
+
+function findWinner (election) {
+  console.log('[AV] Counting ' + election.code)
+  const winner = AV.alternativeVote(election)
+  console.log('[AV] Winner ' + winner.name + ' found in election ' + election.code)
+  io.to(election.code).emit('winner-update', winner)
+  election.countPending = false
+}
 
 server.listen(8080, function () {
   let addr = server.address()

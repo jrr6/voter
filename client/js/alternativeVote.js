@@ -44,6 +44,8 @@
       this.creatorFingerprint = creatorInfo[0]
       this.creatorPubKey = creatorInfo[1]
       this.printFunc = printFunc
+      // Used to determine whether a vote count has been scheduled on this election
+      this.countPending = false
     }
 
     /**

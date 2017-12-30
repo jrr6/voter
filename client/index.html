@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Voter</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="img/manifest.json">
+        <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="apple-mobile-web-app-title" content="Voter">
+        <meta name="application-name" content="Voter">
+        <meta name="theme-color" content="#dedede">
+        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/skeleton.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h3 id="reject-label" class="hidden">You cannot vote again in this election.</h3>
+        <button id="back" class="hidden">Home</button>
+        <!--MARK: Home-->
+        <div id="home" class="container">
+            <section class="header">
+                <h1>Voter</h1>
+                <h3>The simplest electronic Alternative Vote.</h3>
+            </section>
+            <div class="row">
+                <div class="one-half column role-button-col">
+                    <button class="u-full-width" id="im-voter">I'm a Voter</button>
+                </div>
+                <div class="one-half column role-button-col">
+                    <button class="u-full-width" id="im-organizer">I'm an Election Organiser</button>
+                </div>
+            </div>
+        </div>
+
+        <!--MARK: Election creation-->
+        <div id="create-election" class="container hidden">
+            <section class="header">
+                <h3>Organise an Election</h3>
+            </section>
+            <section class="add-candidates">
+                <div class="row">
+                    <h4>Candidates</h4>
+                </div>
+                <div id="create-candidate-list">
+                    <div class="candidate-create row">
+                        <div class="eleven columns"><input class="u-full-width candidate-input" type="text" placeholder="Candidate McName" id="0"></div>
+                        <div class="one columns">
+                            <button class="delete-candidate">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="row">
+                <button id="add-candidate">Add Candidate</button>
+            </div>
+            <div class="row">
+                <label>
+                    <input type="checkbox" checked class="ucheckbox" id="create-show-log">
+                    <span class="label-body">Display detailed Alternative Vote log<span id="keyboard-info"> (can be changed with <code id="keyboard-shortcut">alt-l</code>)</span></span>
+                </label>
+            </div>
+            <br>
+            <div class="row center">
+                <button class="button-primary u-full-width" id="create-election-button">Create Election</button>
+            </div>
+        </div>
+
+        <!--MARK: Election monitoring-->
+        <div class="spinner"></div>
+        <div id="election-view" class="container hidden">
+            <section class="header">
+                <h3>Election <strong id="election-code-disp">123456</strong></h3>
+            </section>
+            <div class="row winner-row">
+                <h5 class="center" id="winning-candidate-label"><strong id="winning-candidate-name">Candidate</strong> <span id="winning-candidate-explanation">is winning</span></h5>
+            </div>
+            <div class="row">
+                <h5 id="cand-pool-label">Candidates</h5>
+            </div>
+            <div id="candidates-container">
+                <div class="row">
+                    <div class="three columns"><p>AN ERROR HAS OCCURRED</p></div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="u-full-width button-primary" id="close-election-button">Close Election</button>
+            </div>
+            <div class="row" id="log-row">
+                <h5>Log</h5>
+                <pre><code id="av-log"></code></pre>
+            </div>
+        </div>
+
+        <!--MARK: Voter election code input-->
+        <div id="voter-join" class="container hidden">
+            <section class="header">
+                <h3>Join an Election</h3>
+            </section>
+            <div class="row">
+                <h4>Enter your Election Code below:</h4>
+            </div>
+            <div class="row">
+                <label for="code-input" autocomplete="off">Election Code</label>
+                <input class="u-full-width" type="text" placeholder="123456" id="code-input" autofocus>
+            </div>
+        </div>
+
+        <!--MARK: Voting screen-->
+        <div id="cast-vote" class="container hidden">
+            <section class="header">
+                <h3>Cast Your Vote</h3>
+            </section>
+            <div class="row">
+                <p>Rank your candidates from favourite at the top to least favourite at the bottom by dragging them within the table. If you do not wish to rank a candidate, deselect the checkbox next to their name in order not to include them in your vote.</p>
+            </div>
+            <table class="u-full-width" id="ballot-table">
+                <tbody>
+                </tbody>
+            </table>
+            <div class="row">
+                <button class="u-full-width button-primary" id="cast-vote-button">Cast Vote</button>
+            </div>
+        </div>
+
+        <!--MARK: Vote confirmation-->
+        <div id="vote-confirmation" class="container hidden">
+            <section class="header">
+                <h3>Vote Cast</h3>
+            </section>
+            <div class="row center">
+                <p>Your vote has been successfully recorded. You may now close out of this window.</p>
+            </div>
+        </div>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/sortable.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.5.1/fingerprint2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.1/dist/forge.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/alternativeVote.js"></script>
+        <script src="js/client.js"></script>
+    </body>
+</html>

@@ -112,6 +112,8 @@
      */
     function redistributeVotes (votes, candIdToDelete) {
       const candIdToDeleteExists = candIdToDelete !== null && candIdToDelete !== undefined
+      
+      ballotLoop: // eslint-disable-line no-labels
       for (let ballot of votes) {
         if (ballot[0] !== undefined) {
           let electee = ballot.shift()
@@ -123,7 +125,7 @@
               electee = ballot.shift()
               if (electee === undefined) {
                 // we've exhausted the ballot—it contains no one who's still in the election, so it's thrown away
-                continue
+                continue ballotLoop // eslint-disable-line no-labels
               }
             }
           }

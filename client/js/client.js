@@ -31,8 +31,14 @@ socket.on('confirm-code', function (data) {
     $('#back').fadeOut()
     AV.shuffleArray(data.candidates)
     data.candidates.forEach(function (candidate) {
-      const el = $('<tr class="ballot-row" candidate-id="' + candidate.id + '"><td><input type="checkbox" checked class="ucheckbox"></td><td class="ballot-rank">ERR</td><td>' + candidate.name + '</td></tr>')
-      $('#ballot-table').append(el)
+      let tr = $('<tr class="ballot-row"></tr>')
+      $(tr).attr('candidate-id', candidate.id)
+      const checkbox = $('<td><input type="checkbox" checked class="ucheckbox"></td>')
+      const rank = $('<td class="ballot-rank">ERR</td>')
+      let nameTd = $('<td>')
+      $(nameTd).text(candidate.name)
+      $(tr).append(checkbox, rank, nameTd)
+      $('#ballot-table').append(tr)
     })
     recalculateBallotIndices()
     $('#voter-join').fadeOut(function () {

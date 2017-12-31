@@ -14,7 +14,7 @@
   margin-top: 25%
 }
 #back {
-    position: absolute;
+    position: fixed;
     top: 1em;
     left: 2em;
 }
@@ -71,6 +71,50 @@ button.no-hover:hover, button.no-hover:active {
 #av-log {
   max-height: 15em;
   overflow: scroll;
+}
+
+#help-button {
+  font-size: 2em;
+  font-weight: lighter;
+  width: 1.25em;
+  padding: 0;
+  height: 1.25em;
+  margin: 0; 
+}
+#help-button-container {
+  margin-top: 5em;
+}
+#help-nav-col {
+  height: 100%;
+}
+#help-nav {
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+  margin: 0 .2rem;
+  display: block;
+  padding: 2.5rem 3rem;
+}
+#help h3 {
+  text-align: center;
+  margin: 1em 0em 1em 0em;
+}
+li p {
+  margin-top: 0.5em;
+}
+@media (min-width: 550px) {
+  #help-nav {
+    position: fixed !important;
+    max-width: 12.5% !important;;
+  }
+}
+#help-nav {
+  position: relative;
+}
+#help-nav a {
+  display: block;
+}
+#help-nav a:not(:first-child) {
+  margin-top: 1em;
 }
 
 /* Loading animation */

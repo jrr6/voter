@@ -7,6 +7,13 @@ $('#back').click(function () {
   })
 })
 
+$('#help-button').click(function () {
+  $('#home').fadeOut(function () {
+    $('#help').fadeIn()
+    $('#back').fadeIn()
+  })
+})
+
 let fingerprint, candidates, keypair
 
 // MARK: Sockets
@@ -219,17 +226,16 @@ $('#create-election-button').click(function () {
 })
 
 $('#close-election-button').click(function () {
+  $('#close-election-button').removeClass('button-primary')
+  $('#close-election-button').addClass('no-hover')
+  $('#close-election-button').attr('disabled', 'disabled')
   let md = forge.md.sha256.create()
   md.update(fingerprint, 'utf8')
   let signature = keypair.privateKey.sign(md)
   socket.emit('close-election', signature)
-  if ($('#winning-candidate-name').text() === '') {
-    $('#winning-candidate-explanation').text('There is no winner.')
-  } else {
-    $('#winning-candidate-explanation').text('has won.')
-  }
-  $('#close-election-button').removeClass('button-primary')
-  $('#close-election-button').addClass('no-hover')
-  $('#close-election-button').attr('disabled', 'disabled')
+})
+// Need to wait for confirmation, and also want to make sure proper winner is being displayed
+socket.on('close-accepted', function () {
+  $('#winning-candidate-explanation').text('has won.')
   $('#close-election-button').text('Election Closed')
 })

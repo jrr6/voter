@@ -8,7 +8,6 @@ const socketio = require('socket.io')
 const express = require('express')
 const forge = require('node-forge')
 const AV = require('./client/js/alternativeVote.js')
-// const irv = require('./irv')
 
 // Module implementations
 
@@ -74,6 +73,7 @@ io.on('connection', function (socket) {
       if (pub.verify(md.digest().bytes(), signature)) {
         findWinner(election) // make sure the election results have been finalized before election is closed
         console.log('[CREATOR] closing election ' + socket.electionCode)
+        socket.emit('close-accepted')
         socket.disconnect() // disconnect() will delete the election for us
       } else {
         console.log('[CREATOR] refusing to close election ' + socket.electionCode)
@@ -90,10 +90,10 @@ io.on('connection', function (socket) {
     if (loc !== -1) {
       let electionToJoin = activeElections[loc]
       if (electionToJoin.hasVoted(data.fingerprint)) {
-        // socket.emit('voter-rejected')
-        // socket.disconnect()
-        // console.log('[VOTER] voter ' + data.fingerprint + ' rejected from joining election ' + data.code)
-        // return
+        socket.emit('voter-rejected')
+        socket.disconnect()
+        console.log('[VOTER] voter ' + data.fingerprint + ' rejected from joining election ' + data.code)
+        return
       }
       socket.join(data.code)
       socket.electionCode = data.code
@@ -108,10 +108,10 @@ io.on('connection', function (socket) {
   socket.on('vote-cast', function (data) {
     let actElection = activeElections[findCode(socket.electionCode)]
     if (actElection.hasVoted(data.fingerprint)) {
-      // socket.emit('voter-rejected')
-      // socket.disconnect()
-      // console.log('[VOTER] voter ' + data.fingerprint + ' rejected from voting in election ' + socket.electionCode)
-      // return
+      socket.emit('voter-rejected')
+      socket.disconnect()
+      console.log('[VOTER] voter ' + data.fingerprint + ' rejected from voting in election ' + socket.electionCode)
+      return
     }
     actElection.addVoterID(data.fingerprint)
     actElection.ballots.push(data.ballot)

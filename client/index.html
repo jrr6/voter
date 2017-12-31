@@ -34,6 +34,9 @@
                     <button class="u-full-width" id="im-organizer">I'm an Election Organiser</button>
                 </div>
             </div>
+            <div class="row" id="help-button-container">
+                <div class="one columns offset-by-eleven"><button id="help-button">?</button></div>
+            </div>
         </div>
 
         <!--MARK: Election creation-->
@@ -60,7 +63,7 @@
             <div class="row">
                 <label>
                     <input type="checkbox" checked class="ucheckbox" id="create-show-log">
-                    <span class="label-body">Display detailed Alternative Vote log<span id="keyboard-info"> (can be changed with <code id="keyboard-shortcut">alt-l</code>)</span></span>
+                    <span class="label-body">Display detailed Alternative Vote log<span id="keyboard-info"> (can be changed with <code id="keyboard-shortcut">alt-L</code>)</span></span>
                 </label>
             </div>
             <br>
@@ -133,6 +136,76 @@
             </section>
             <div class="row center">
                 <p>Your vote has been successfully recorded. You may now close out of this window.</p>
+            </div>
+        </div>
+
+        <!--MARK: Help panel-->
+        <div id="help" class="container hidden">
+            <h3>Welcome to Voter</h3>
+            <div class="row">
+                <div class="three columns" id="help-nav-col">
+                    <nav id="help-nav">
+                        <a href="#help-voting">Voting in an Election</a>
+                        <a href="#help-creating">Creating an Election</a>
+                        <a href="#help-running">Running an Election</a>
+                        <a href="#help-av">The Alternative Vote</a>
+                        <a href="#help-troubleshoot">Troubleshooting</a>
+                    </nav>
+                    <div style="visibility: hidden">&nbsp;</div>
+                </div>
+                <div class="nine columns">
+                    <h5 id="help-voting">Voting in an Election</h5>
+                    <ul>
+                        <li>Select "I Am a Voter"</li>
+                        <li>Enter the code for the election in which you are voting</li>
+                        <li>Rearrange candidates by dragging and dropping them within the ballot list, such that your first-place choice is at the top of the list and your least favourite at the bottom.
+                            The numbers in the middle of the table (next to the candidate names) show the position in which you have placed them on your ballot.
+                            If you wish not to rank a given candidate, deselect the checkbox next to their name to exclude them from your ballot.</li>
+                        <li>Select "Cast Vote"</li>
+                    </ul>
+                    <h5 id="help-creating">Creating an Election</h5>
+                    <ul>
+                        <li>Select "I'm an Election Organiser"</li>
+                        <li>Add the candidates in your election (use the "Add Candidate" button to add additional candidates)</li>
+                        <li>Select whether you would like to display a live feed of the alternative vote process on the election page (this can be toggled with a keyboard shortcut afterward)</li>
+                        <li>Select "Create Election"</li>
+                    </ul>
+                    <h5 id="help-running">Running an Election</h5>
+                    <p>The election management screen displays all the candidates in the election, as well as the candidate who is currently winning (once votes have been cast).
+                        This display refreshes periodically, but <em>does not do so for every vote cast</em>. The final tally will also be updated when the election is closed.
+                        The screen can also display a log of the alternative vote process, which can be toggled with the <code>alt/option</code> + <code>L</code> keyboard shortcut.
+                        To end an election, select the "Close Election" button. The final winner will be displayed at the top of the screen, next to the words "has won."
+                        Please note that <strong>closing or reloading the page will terminate the election</strong>.</p>
+                    <h5 id="help-av">The Alternative Vote</h5>
+                    <p>The alternative vote algorithm (also known as "instant-runoff voting") is a voting system that offers significant advantages over traditional "first-past-the-post" systems.
+                        Namely, it does away with the so-called "spoiler effect." Under AV, multiple elections can be simultaneously simulated to more fairly determine the winner of a given election.
+                        This is done by eliminating the least popular candidate and redistributing their votes as per the voters' second-place choices.
+                        In this way, voters' preferences were a given candidate not to have been in the race can be determined, thus resulting in the election of a more widely-supported candidate.
+                        Please refer to the <a href="https://en.wikipedia.org/wiki/Instant-runoff_voting">Wikipedia page</a> on this subject for additional details.</p>
+                        <p>This site implements a programmatic version of the alternative vote. The specific process it follows can be viewed live in the AV log on the election management page, and is outlined below:</p>
+                        <ol>
+                            <li>Determine the Droop quota (half the number of ballots cast&mdash;rounded down if necessary&mdash;plus one). This is the number of votes a candidate needs to have a majority</li>
+                            <li>Go through the current ballots and assign each to the most preferred candidate on that ballot who is still in the race (if no such candidate exists&mdash;i.e., all the candidates the voter selected have been eliminated&mdash;the ballot is discarded at this time)</li>
+                            <li>Determine the candidate with the fewest number of votes (if there is a tie, randomly select one of those tied for least)</li>
+                            <li>Eliminate the "biggest loser" candidate, and redistribute their votes, removing the now-eliminated candidate from their ballots (e.g., their second pick is now their first)</li>
+                            <li>Repeat until either one candidate has a majority (as per the Droop quota) or only one candidate remains</li>
+                        </ol>
+                    <h5 id="help-troubleshoot">Troubleshooting</h5>
+                    <ul>
+                        <li>Why is a winner selected even if no votes are cast?
+                            <p>This occurs because the alternative vote algorithm will pick a random winner if two candidates are exactly tied. The number of votes cast does not affect whether this process occurs.</p>
+                        </li>
+                        <li>Why do I see the error, "A non-integer ID was found on one of the candidate elements?"
+                            <p>This may be due to an extension you have installed on your web browser. Try disabling extensions or using a different web browser to resolve the issue.</p>
+                        </li>
+                        <li>Why do I not see votes on the election management page immediately after they are cast?
+                            <p>To alleviate computational strain, the server automatically updates vote totals shown on the election management screen after one second of votes being received. Wait momentarily and the results will appear automatically.</p>
+                        </li>
+                        <li>Why does the election not close after I click "Close Election?"
+                            <p>Because the server must validate your identity, there may be a brief pause between when you click "Close Election" and when the election closes. When the election has been confirmed to have closed, the text on the button on the election management screen will change from "Close Election" to "Election Closed." If this does not occur (i.e., if the text remains "Close Election" indefinitely), your authentication token may have been rejected by the server.</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 

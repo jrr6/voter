@@ -187,7 +187,7 @@
                             <li>Determine the Droop quota (half the number of ballots cast&mdash;rounded down if necessary&mdash;plus one). This is the number of votes a candidate needs to have a majority</li>
                             <li>Go through the current ballots and assign each to the most preferred candidate on that ballot who is still in the race (if no such candidate exists&mdash;i.e., all the candidates the voter selected have been eliminated&mdash;the ballot is discarded at this time)</li>
                             <li>Determine the candidate with the fewest number of votes (if there is a tie, randomly select one of those tied for least)</li>
-                            <li>Eliminate the "biggest loser" candidate, and redistribute their votes, removing the now-eliminated candidate from their ballots (e.g., their second pick is now their first)</li>
+                            <li>Eliminate the "biggest loser" candidate and redistribute their votes, removing the now-eliminated candidate from their ballots (e.g., their second pick is now their first)</li>
                             <li>Repeat until either one candidate has a majority (as per the Droop quota) or only one candidate remains</li>
                         </ol>
                     <h5 id="help-troubleshoot">Troubleshooting</h5>
@@ -195,7 +195,7 @@
                         <li>Why is a winner selected even if no votes are cast?
                             <p>This occurs because the alternative vote algorithm will pick a random winner if two candidates are exactly tied. The number of votes cast does not affect whether this process occurs.</p>
                         </li>
-                        <li>Why do I see the error, "A non-integer ID was found on one of the candidate elements?"
+                        <li>Why do I see an error about a "non-integer ID?"
                             <p>This may be due to an extension you have installed on your web browser. Try disabling extensions or using a different web browser to resolve the issue.</p>
                         </li>
                         <li>Why do I not see votes on the election management page immediately after they are cast?

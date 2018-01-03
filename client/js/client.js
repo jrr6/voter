@@ -200,13 +200,16 @@ $('#create-election-button').click(function () {
   $('#back').fadeOut()
   $('#create-election').fadeOut()
   $('.spinner').show()
-  if (!shouldLog) $('#log-row').hide()
-  document.addEventListener('keydown', function (event) {
-    if (event.keyCode == 76 && event.altKey) {
-      event.preventDefault()
-      $('#log-row').toggle('normal')
-    }
-  }, false)
+  if (shouldLog) {
+    document.addEventListener('keydown', function (event) {
+      if (event.keyCode == 76 && event.altKey) {
+        event.preventDefault()
+        $('#log-row').toggle('normal')
+      }
+    }, false)
+  } else {
+    $('#log-row').hide()
+  }
 
   // send fingerprint and public key
   const pki = forge.pki

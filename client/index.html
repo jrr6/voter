@@ -63,7 +63,7 @@
             <div class="row">
                 <label>
                     <input type="checkbox" checked class="ucheckbox" id="create-show-log">
-                    <span class="label-body">Display detailed Alternative Vote log<span id="keyboard-info"> (can be changed with <code id="keyboard-shortcut">alt-L</code>)</span></span>
+                    <span class="label-body">Enable Alternative Vote log<span id="keyboard-info"> (if enabled, can be shown/hidden with <code id="keyboard-shortcut">alt-L</code>)</span></span>
                 </label>
             </div>
             <br>
@@ -167,13 +167,13 @@
                     <ul>
                         <li>Select "I'm an Election Organiser"</li>
                         <li>Add the candidates in your election (use the "Add Candidate" button to add additional candidates)</li>
-                        <li>Select whether you would like to display a live feed of the alternative vote process on the election page (this can be toggled with a keyboard shortcut afterward)</li>
+                        <li>Select whether you would like to display a live feed of the alternative vote process on the election page (enabling this setting may slow down ballot counting slightly in very large elections; if it is enabled, you can show and hide the log with a keyboard shortcut)</li>
                         <li>Select "Create Election"</li>
                     </ul>
                     <h5 id="help-running">Running an Election</h5>
                     <p>The election management screen displays all the candidates in the election, as well as the candidate who is currently winning (once votes have been cast).
                         This display refreshes periodically, but <em>does not do so for every vote cast</em>. The final tally will also be updated when the election is closed.
-                        The screen can also display a log of the alternative vote process, which can be toggled with the <code>alt/option</code> + <code>L</code> keyboard shortcut.
+                        The screen can also display a log of the alternative vote process if enabled during election creation, and this log can be toggled with the <code>alt/option</code> + <code>L</code> keyboard shortcut.
                         To end an election, select the "Close Election" button. The final winner will be displayed at the top of the screen, next to the words "has won."
                         Please note that <strong>closing or reloading the page will terminate the election</strong>.</p>
                     <h5 id="help-av">The Alternative Vote</h5>

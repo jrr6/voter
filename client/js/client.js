@@ -202,7 +202,7 @@ $('#create-election-button').click(function () {
   $('.spinner').show()
   if (shouldLog) {
     document.addEventListener('keydown', function (event) {
-      if (event.keyCode == 76 && event.altKey) {
+      if (event.keyCode === 76 && event.altKey) {
         event.preventDefault()
         $('#log-row').toggle('normal')
       }

@@ -71,6 +71,7 @@ io.on('connection', function (socket) {
     md.update(actual, 'utf8')
     try {
       if (pub.verify(md.digest().bytes(), signature)) {
+        // FIXME: If we re-find a winner of a tied election, it might change who gets randomly picked to win
         findWinner(election) // make sure the election results have been finalized before election is closed
         console.log('[CREATOR] closing election ' + socket.electionCode)
         socket.emit('close-accepted')

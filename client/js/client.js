@@ -1,6 +1,7 @@
 /* global io $ Fingerprint2 alert AV forge */
 
 $('#back').click(function () {
+  if (window.history.replaceState) window.history.replaceState('home', 'Voter', '#')
   $('#back').fadeOut()
   $.when($('.container:not("#home")').fadeOut()).done(function () {
     $('#home').fadeIn()

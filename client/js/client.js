@@ -1,4 +1,4 @@
-/* global io $ Fingerprint2 alert AV forge */
+/* global io $ Fingerprint2 AV forge swal */
 
 $('#back').click(function () {
   if (window.history.replaceState) window.history.replaceState('home', 'Voter', '#')
@@ -118,7 +118,7 @@ $('#cast-vote-button').click(function () {
       if (!isNaN(parsedId)) {
         voteArray.push(parsedId)
       } else {
-        alert('An error occurred when trying to cast your ballot. Your vote was not recorded. ' +
+        swal('An error occurred when trying to cast your ballot. Your vote was not recorded. ' +
         'The following error occurred:\n\nA non-integer candidate ID was found when parsing draggable candidates.')
         error = true
       }
@@ -167,13 +167,13 @@ $('#create-election-button').click(function () {
   $('.candidate-input').each(function (e) {
     let parsedId = parseInt($(this).attr('id'))
     if (isNaN(parsedId)) {
-      alert('An error occurred while trying to create the election. The election was not created. ' +
+      swal('An error occurred while trying to create the election. The election was not created. ' +
       'The following error occurred:\n\nA non-integer ID was found on one of the candidate elements.')
       innerError = true
       return
     }
     if ($(this).val().trim() === '') {
-      alert('Candidate names may not be empty.')
+      swal('Candidate names may not be empty.')
       innerError = true
       return
     }
@@ -181,7 +181,7 @@ $('#create-election-button').click(function () {
   })
   if (innerError) return
   if (candidates.length < 1) {
-    alert('You must enter at least one candidate.')
+    swal('You must enter at least one candidate.')
     return
   }
   let shouldLog = $('#create-show-log').is(':checked')
@@ -217,7 +217,7 @@ $('#create-election-button').click(function () {
   const rsa = pki.rsa
   rsa.generateKeyPair({bits: 2048, workers: -1}, function (err, aKeypair) {
     if (err !== null) {
-      alert('An error occurred generating an RSA keypair for server verification')
+      swal('An error occurred generating an RSA keypair for server verification')
       return
     }
     keypair = aKeypair

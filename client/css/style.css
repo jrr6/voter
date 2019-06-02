@@ -73,6 +73,17 @@ button.no-hover:hover, button.no-hover:active {
   overflow: scroll;
 }
 
+/* Stop Skeleton messing with SweetAlerts */
+.swal-button {
+  line-height: unset;
+  height: unset;
+  color: white !important;
+  background-color: #33C3F0;
+}
+.swal-button:focus {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgb(209, 209, 209);
+}
+
 #help-button {
   font-size: 2em;
   font-weight: lighter;
@@ -189,7 +200,7 @@ li p {
    z-index: 1;
    width: 100%;
    height: 100%;
-   border: 2px solid #f2f2f2;
+   border: 2px solid rgb(209, 209, 209);; /* changed from #f2f2f2 */
    -webkit-transition: all 0.3s ease-in-out;
    transition: all 0.3s ease-in-out;
  }

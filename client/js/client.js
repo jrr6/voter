@@ -246,6 +246,10 @@ $('#close-election-button').click(function () {
 })
 // Need to wait for confirmation, and also want to make sure proper winner is being displayed
 socket.on('close-accepted', function () {
-  $('#winning-candidate-explanation').text('has won.')
+  if ($('#winning-candidate-name').text() === '') {
+    $('#winning-candidate-explanation').text('There is no winner.')
+  } else {
+    $('#winning-candidate-explanation').text('has won.')
+  }
   $('#close-election-button').text('Election Closed')
 })

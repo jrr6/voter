@@ -12,7 +12,6 @@
         <meta name="apple-mobile-web-app-title" content="Voter">
         <meta name="application-name" content="Voter">
         <meta name="theme-color" content="#dedede">
-        <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/skeleton.css">
         <link rel="stylesheet" href="css/style.css">
@@ -76,7 +75,7 @@
         <div class="spinner"></div>
         <div id="election-view" class="container hidden">
             <section class="header">
-                <h3>Election <strong id="election-code-disp">123456</strong></h3>
+                <h3>Election <strong id="election-code-disp">ERROR</strong></h3>
             </section>
             <div class="row winner-row">
                 <h5 class="center" id="winning-candidate-label"><strong id="winning-candidate-name">Candidate</strong> <span id="winning-candidate-explanation">is winning</span></h5>
@@ -118,7 +117,7 @@
                 <h3>Cast Your Vote</h3>
             </section>
             <div class="row">
-                <p>Rank your candidates from favorite at the top to least favorite at the bottom by dragging them within the table. If you do not wish to rank a candidate, deselect the checkbox next to their name in order not to include them in your vote.</p>
+                <p>Rank your candidates from favorite at the top to least favorite at the bottom by dragging them within the table. If you do not wish to rank a candidate, deselect the checkbox next to their name to exclude them from your ballot.</p>
             </div>
             <table class="u-full-width" id="ballot-table">
                 <tbody>

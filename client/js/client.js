@@ -239,6 +239,7 @@ $('#close-election-button').click(function () {
   $('#close-election-button').removeClass('button-primary')
   $('#close-election-button').addClass('no-hover')
   $('#close-election-button').attr('disabled', 'disabled')
+  $('#close-election-button').text('Closing election…')
   let md = forge.md.sha256.create()
   md.update(fingerprint, 'utf8')
   let signature = keypair.privateKey.sign(md)

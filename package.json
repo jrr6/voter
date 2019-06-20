@@ -1,5 +1,5 @@
 {
-  "name": "Voter",
+  "name": "voter",
   "version": "1.0.0",
   "description": "A simple online voting system",
   "main": "server.js",

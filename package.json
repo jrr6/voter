@@ -4,7 +4,7 @@
   "description": "A simple online voting system",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "node-forge": "^0.10.0",
     "socket.io": "^2.4.0"
   }
